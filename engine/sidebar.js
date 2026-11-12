@@ -11,7 +11,7 @@ for (const post of posts) {
   item.textContent = post.title;
 
   item.addEventListener("click", () => {
-    window.location.hash = post.slug;
+     history.replaceState(null, "", "#" + post.slug);
     showMarkdown(post.file);
   });
 
