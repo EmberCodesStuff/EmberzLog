@@ -2,15 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>My Blog</title>
+  <title>EmbLogz</title>
   <link rel="stylesheet" href="engine/styles/sidebar.css" />
 </head>
 <body>
   <div id="sidebar">
-    <h1>My Blog</h1>
-    <ul id="post-list"></ul>
+    <div class="sidebar-header">
+      <button id="toggle" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+      <h1 class="sidebar-title">EmbLogz</h1>
+    </div>
+
+    <div class="sidebar-content">
+      <ul id="post-list"></ul>
+      <p class="sidebar-links">
+        <a href="https://github.com/EmberCodesStuff/EmberzLog" target="_blank" class="icon-btn" aria-label="GitHub">
+          <img src="assets/github.svg" alt="" />
+        </a>
+        <a href="https://linktr.ee/yourname" target="_blank" class="icon-btn" aria-label="LinkTree">
+          <img src="assets/linktree.svg" alt="" />
+        </a>
+      </p>
+    </div>
   </div>
+
   <iframe name="viewer" id="viewer"></iframe>
+
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script type="module" src="engine/sidebar.js"></script>
   <script type="module" src="engine/render.js"></script>

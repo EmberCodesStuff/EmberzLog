@@ -1,12 +1,18 @@
 const frame = document.getElementById("viewer");
 
-export async function showMarkdown(file, cssFile = "engine/styles/default-post.css", scriptFile) {
+export async function showMarkdown(file, cssFile, scriptFile) {
   const response = await fetch(file);
   const text = await response.text();
 
-  const css = await (await fetch(cssFile)).text();
+  // Always start with the default style
+  let css = await (await fetch("engine/styles/default-post.css")).text();
 
-  // No script for this post? Then js stays empty and nothing is added
+  // Add the post's own CSS on top, if it has one
+  if (cssFile) {
+    const res = await fetch(cssFile);
+    if (res.ok) css += await res.text();
+  }
+
   let js = "";
   if (scriptFile) {
     const res = await fetch(scriptFile);

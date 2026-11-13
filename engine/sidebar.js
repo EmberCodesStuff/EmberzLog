@@ -22,3 +22,11 @@ for (const post of posts) {
 const slug = window.location.hash.slice(1);
 const match = posts.find((p) => p.slug === slug);
 if (match) showMarkdown(match.file, match.css, match.script);
+
+// toggle button
+
+const toggle = document.getElementById("toggle");
+
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("collapsed");
+});

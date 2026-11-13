@@ -1,34 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  --glass-fill: rgba(255, 255, 255, 0.45);
+  --glass-fill-hover: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --text: #2b2a28;
+  --text-dim: #8a8580;
+}
+
 body {
   margin: 0;
-  display: flex;               /* put children side by side */
-  height: 100vh;               /* full height of the window */
-  font-family: sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--text);
+  /* one faint neutral glow -- no rainbow */
+  background:
+    radial-gradient(45% 45% at 15% 20%, rgba(0,0,0,0.05) 0%, transparent 70%),
+    #f5f4f2;
 }
 
 #sidebar {
-  width: 250px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 240px;
+  max-height: calc(100vh - 40px);
   padding: 16px;
-  background: #222;
-  color: white;
-  overflow-y: auto;            /* scroll if the list gets long */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-fill);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  z-index: 10;
+  transition: width 0.35s ease, height 0.35s ease, padding 0.35s ease, border-radius 0.35s ease;
 }
 
-#sidebar ul {
-  list-style: none;            /* remove the bullet dots */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+#toggle {
+  flex: none;
+  width: 32px;
+  height: 32px;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#toggle svg { width: 18px; height: 18px; }
+#toggle:hover { background: var(--glass-fill-hover); }
+
+.sidebar-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.sidebar-content {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+#post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
 .sidebar-item {
-  padding: 8px;
-  cursor: pointer;             /* hand cursor on hover */
+  margin: 0 -10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .sidebar-item:hover {
-  background: #444;
+  background: var(--glass-fill-hover);
+  color: var(--text);
 }
 
+.sidebar-links {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: var(--glass-fill-hover);
+  border: 1px solid var(--glass-border);
+  transition: transform 0.2s ease;
+}
+
+.icon-btn img { display: block; width: 18px; height: 18px; }
+.icon-btn:hover { transform: translateY(-2px); }
+
+/* The page is ALWAYS full screen. The sidebar floats on top of it. */
 #viewer {
-  flex: 1;                     /* take all the leftover width */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   border: none;
+  background: #ffffff;
+  z-index: 1;
+}
+
+/* Collapsed: just the button, everything else fades */
+
+body.collapsed #sidebar {
+  width: 52px;
+  height: 52px;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+body.collapsed .sidebar-title,
+body.collapsed .sidebar-content {
+  opacity: 0;
+  pointer-events: none;
 }
