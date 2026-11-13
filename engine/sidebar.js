@@ -12,7 +12,7 @@ for (const post of posts) {
 
   item.addEventListener("click", () => {
      history.replaceState(null, "", "#" + post.slug);
-    showMarkdown(post.file);
+    showMarkdown(post.file, post.css, post.script);
   });
 
   list.appendChild(item);
@@ -21,4 +21,4 @@ for (const post of posts) {
 // If the URL already has a hash, load that post
 const slug = window.location.hash.slice(1);
 const match = posts.find((p) => p.slug === slug);
-if (match) showMarkdown(match.file);
+if (match) showMarkdown(match.file, match.css, match.script);

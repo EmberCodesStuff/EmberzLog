@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  display: flex;               /* put children side by side */
+  height: 100vh;               /* full height of the window */
+  font-family: sans-serif;
+}
+
+#sidebar {
+  width: 250px;
+  padding: 16px;
+  background: #222;
+  color: white;
+  overflow-y: auto;            /* scroll if the list gets long */
+}
+
+#sidebar ul {
+  list-style: none;            /* remove the bullet dots */
+  padding: 0;
+}
+
+.sidebar-item {
+  padding: 8px;
+  cursor: pointer;             /* hand cursor on hover */
+}
+
+.sidebar-item:hover {
+  background: #444;
+}
+
+#viewer {
+  flex: 1;                     /* take all the leftover width */
+  height: 100%;
+  border: none;
+}
